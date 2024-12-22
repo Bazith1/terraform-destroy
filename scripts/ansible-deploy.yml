@@ -1,16 +1,12 @@
 ---
-- name: Deploy Python App to EKS
+- name: Deploy application
   hosts: localhost
-  gather_facts: no
+  connection: local  # Use local connection instead of SSH
   tasks:
     - name: Ensure deploy.sh is executable
       file:
-        path: "./scripts/deploy.sh"
-        mode: '0755'
+        path: ./scripts/deploy.sh
+        mode: u+x
 
-    - name: Run deploy.sh script
-      shell: "./scripts/deploy.sh {{ eks_cluster_name }}"
-      environment:
-        KUBECONFIG: "/path/to/kubeconfig"  # Optional if needed
-      args:
-        chdir: "{{ playbook_dir }}"  # Change to the directory where the script is located
+    - name: Run the deploy.sh script
+      command: ./scripts/deploy.sh "{{ eks_cluster_name }}"
