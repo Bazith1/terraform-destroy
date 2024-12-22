@@ -14,6 +14,7 @@ phases:
       - sudo chmod +x ./scripts/eks-terraform/terraform-eks.sh
   build:
     commands:
+      - cd scripts/eks-terraform/terraform-eks.sh
       - echo "Initializing Terraform..."
       - terraform init
       - echo "Applying Terraform to create/update EKS cluster..."
