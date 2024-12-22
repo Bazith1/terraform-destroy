@@ -12,11 +12,11 @@ phases:
     commands:
       - echo "Preparing Terraform configurations..."
       - ls -R
-      - chmod +x ./scripts/eks-terraform/terraform-eks.sh
+      - chmod +x ./scripts/terraform-build/terraform-eks.sh
   build:
     commands:
       - echo "Running Terraform script..."
-      - ./scripts/eks-terraform/terraform-eks.sh
+      - ./scripts/terraform-build/terraform-eks.sh
   post_build:
     commands:
       - echo "Terraform execution complete. Build finished."
