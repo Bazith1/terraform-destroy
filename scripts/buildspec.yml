@@ -1,0 +1,10 @@
+version: 0.2
+phases:
+  pre_build:
+    commands:
+      - echo "Setting up Terraform..."
+  build:
+    commands:
+      - echo "Applying Terraform to create/update EKS cluster..."
+      - ./scripts/terraform-eks.sh
+

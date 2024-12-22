@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: my-flask-app
-        image: <your-ecr-repo>/my-flask-app:latest
+        image: bazith1/my-flask-app:latest
         ports:
         - containerPort: 5000
 
