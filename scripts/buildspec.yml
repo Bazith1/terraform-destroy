@@ -11,7 +11,7 @@ phases:
   pre_build:
     commands:
       - echo "Preparing Terraform configurations..."
-      - sudo chmod +x ./scripts/eks-terraform/terraform-eks.sh
+      - sudo chmod +x scripts/eks-terraform/terraform-eks.sh
   build:
     commands:
       - cd scripts/eks-terraform/terraform-eks.sh
