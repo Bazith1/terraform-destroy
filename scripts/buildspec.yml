@@ -6,5 +6,5 @@ phases:
   build:
     commands:
       - echo "Applying Terraform to create/update EKS cluster..."
-      - ./scripts/terraform-eks.sh
+      - ./terraform-eks.sh
 
