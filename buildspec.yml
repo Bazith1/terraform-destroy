@@ -13,6 +13,7 @@ phases:
     commands:
       - echo "Pushing the Docker image to Docker Hub..."
       - docker push bazith1/my-flask-app:latest
+      - echo "Build was successful"
 artifacts:
   files:
     - k8s/*
