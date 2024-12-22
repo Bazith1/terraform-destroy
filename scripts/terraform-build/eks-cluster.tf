@@ -31,8 +31,7 @@ module "eks" {
 
 
 module "fargate_profile" {
-  source = "terraform-aws-modules/eks/aws//modules/fargate-profile"
-
+  source       = "terraform-aws-modules/eks/aws//modules/fargate-profile"
   name         = "separate-fargate-profile"
   cluster_name = local.cluster_name
 
@@ -45,4 +44,7 @@ module "fargate_profile" {
     Environment = "dev"
     Terraform   = "true"
   }
+
+  # Ensures Fargate profile creation waits for EKS cluster readiness
+  depends_on = [module.eks]
 }
