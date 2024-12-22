@@ -1,5 +1,4 @@
 #!/bin/bash
-set -e
 
 # Navigate to the directory containing .tf files
 cd "$(dirname "$0")"
@@ -14,8 +13,8 @@ terraform validate
 
 # Plan Terraform deployment
 echo "Planning Terraform deployment..."
-terraform plan
+terraform plan -out=tfplan
 
-# Apply Terraform deployment (if needed)
-# echo "Applying Terraform deployment..."
-# terraform apply -auto-approve
+# Apply Terraform deployment
+echo "Applying Terraform deployment..."
+terraform apply -auto-approve tfplan
