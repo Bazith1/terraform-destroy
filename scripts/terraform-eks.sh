@@ -8,7 +8,7 @@ if ! command -v terraform &> /dev/null; then
 fi
 
 # Initialize and Apply Terraform
-cd eks-terraform
+cd scripts/eks-terraform
 terraform init
 terraform apply -auto-approve
 
