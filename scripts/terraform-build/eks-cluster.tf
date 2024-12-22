@@ -48,3 +48,15 @@ module "fargate_profile" {
   # Ensures Fargate profile creation waits for EKS cluster readiness
   depends_on = [module.eks]
 }
+
+
+resource "null_resource" "deploy_python_app" {
+  depends_on = [
+    aws_eks_cluster.eks_cluster,
+    aws_eks_node_group.node_group
+  ]
+
+  provisioner "local-exec" {
+    command = "./deploy-python-app.sh"
+  }
+}
