@@ -2,11 +2,6 @@ output "cluster_name" {
   value = local.cluster_name
 }
 
-# Output the Cluster Name
-output "cluster_name" {
-  value = aws_eks_cluster.eks_cluster.name
-}
-
 output "cluster_id" {
   description = "EKS cluster ID."
   value       = module.eks.cluster_id
