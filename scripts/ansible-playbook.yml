@@ -22,8 +22,8 @@
     - name: Apply Kubernetes manifests for deployment
       shell: |
         echo "Applying Kubernetes Manifests..."
-        kubectl apply -f scripts/k8s/deployment.yaml
-        kubectl apply -f scripts/k8s/service.yaml
+        kubectl apply -f ../k8s/deployment.yaml
+        kubectl apply -f ../k8s/service.yaml
       when: cluster_info.rc == 0
       register: deploy_result
       failed_when: deploy_result.rc != 0
