@@ -1,17 +1,20 @@
 #!/bin/bash
 set -e
 
-# Get the cluster name from the argument
-CLUSTER_NAME=$1
-REGION="ap-south-1"
-
+# Authenticate with EKS
 echo "Authenticating to EKS..."
+aws eks update-kubeconfig --name "$1" --region ap-south-1
 
-# Authenticate with EKS Cluster using AWS CLI
-aws eks update-kubeconfig --region $REGION --name "$CLUSTER_NAME"
+# Check if connection is successful
+kubectl cluster-info
 
-# Apply Kubernetes Manifests for your Python Application
-kubectl apply -f k8s/deployment.yaml
-kubectl apply -f k8s/service.yaml
-
-echo "Deployment to cluster $CLUSTER_NAME complete!"
+if [ $? -eq 0 ]; then
+  # Deploy Python app if authentication is successful
+  echo "Applying Kubernetes Manifests..."
+  kubectl apply -f k8s/deployment.yaml
+  kubectl apply -f k8s/service.yaml
+  echo "Deployment completed."
+else
+  echo "Failed to authenticate with the EKS cluster."
+  exit 1
+fi
