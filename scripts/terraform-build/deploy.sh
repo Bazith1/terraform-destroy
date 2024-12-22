@@ -1,17 +1,17 @@
 #!/bin/bash
 set -e
 
+# Get the cluster name from the argument
+CLUSTER_NAME=$1
+REGION="ap-south-1"
+
 echo "Authenticating to EKS..."
-# Load Cluster Name from Terraform Outputs
-CLUSTER_NAME=$(jq -r '.cluster_name.value' terraform-output.json)
 
-# Authenticate with EKS Cluster
-aws eks update-kubeconfig --region ap-south-1 --name "$CLUSTER_NAME"
+# Authenticate with EKS Cluster using AWS CLI
+aws eks update-kubeconfig --region $REGION --name "$CLUSTER_NAME"
 
-# Apply Kubernetes Manifests
+# Apply Kubernetes Manifests for your Python Application
 kubectl apply -f k8s/deployment.yaml
 kubectl apply -f k8s/service.yaml
 
 echo "Deployment to cluster $CLUSTER_NAME complete!"
-
-
