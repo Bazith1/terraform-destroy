@@ -8,6 +8,8 @@ phases:
       - echo "Installing Terraform..."
       - curl -o /tmp/terraform.zip https://releases.hashicorp.com/terraform/1.5.7/terraform_1.5.7_linux_amd64.zip
       - unzip /tmp/terraform.zip -d /usr/local/bin/
+      - echo "Installing Ansible..."
+      - sudo pip install ansible
   pre_build:
     commands:
       - echo "Preparing Terraform configurations..."
@@ -17,10 +19,14 @@ phases:
     commands:
       - echo "Running Terraform script..."
       - ./scripts/terraform-build/terraform-eks.sh
+      - echo "Extracting EKS cluster details..."
+      - terraform -chdir=scripts/terraform-build output -json > eks-cluster-output.json
+
   post_build:
     commands:
       - echo "Terraform execution complete. Build finished."
-
+      - echo "Running Ansible playbook to deploy the app..."
+      - ansible-playbook -i localhost, scripts/ansible-deploy.yml --extra-vars "eks_cluster_name=$(jq -r '.cluster_name.value' eks-cluster-output.json)"
 artifacts:
   files:
     - "**/*"

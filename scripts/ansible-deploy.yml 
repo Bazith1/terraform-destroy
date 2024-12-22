@@ -1,0 +1,16 @@
+---
+- name: Deploy Python App to EKS
+  hosts: localhost
+  gather_facts: no
+  tasks:
+    - name: Ensure deploy.sh is executable
+      file:
+        path: "./scripts/deploy.sh"
+        mode: '0755'
+
+    - name: Run deploy.sh script
+      shell: "./scripts/deploy.sh {{ eks_cluster_name }}"
+      environment:
+        KUBECONFIG: "/path/to/kubeconfig"  # Optional if needed
+      args:
+        chdir: "{{ playbook_dir }}"  # Change to the directory where the script is located
