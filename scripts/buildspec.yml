@@ -6,5 +6,8 @@ phases:
   build:
     commands:
       - echo "Applying Terraform to create/update EKS cluster..."
+      - chmod +x ./terraform-eks.sh
       - ./terraform-eks.sh
-
+  post_build:
+    commands:
+      - echo "Build Complete"
