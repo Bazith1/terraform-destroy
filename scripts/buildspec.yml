@@ -11,12 +11,11 @@ phases:
   pre_build:
     commands:
       - echo "Preparing Terraform configurations..."
+      - ls -R
+      - chmod +x ./scripts/eks-terraform/terraform-eks.sh
   build:
     commands:
-      - cd scripts/eks-terraform
-      - echo "Initializing Terraform..."
-      - terraform init
-      - echo "Applying Terraform to create/update EKS cluster..."
+      - echo "Running Terraform script..."
       - ./scripts/eks-terraform/terraform-eks.sh
   post_build:
     commands:
