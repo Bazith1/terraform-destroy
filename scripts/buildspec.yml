@@ -13,11 +13,11 @@ phases:
       - echo "Preparing Terraform configurations..."
   build:
     commands:
-      - cd scripts/eks-terraform/terraform-eks.sh
+      - cd scripts/eks-terraform
       - echo "Initializing Terraform..."
       - terraform init
       - echo "Applying Terraform to create/update EKS cluster..."
-      - ./scripts/eks-terraform/terraform-eks.sh
+      - ./terraform-eks.sh
   post_build:
     commands:
       - echo "Terraform execution complete. Build finished."
