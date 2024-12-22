@@ -12,7 +12,9 @@ phases:
       - curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
       - sudo python3 get-pip.py
       - echo "Installing Ansible..."
-      - sudo pip install ansible
+      - pip install ansible boto3  # Added `boto3` for AWS-related tasks
+      - echo "Installing jq for JSON parsing..."
+      - yum install -y jq
   pre_build:
     commands:
       - echo "Preparing Terraform configurations..."
@@ -29,6 +31,7 @@ phases:
     commands:
       - echo "Terraform execution complete. Build finished."
       - echo "Running Ansible playbook to deploy the app..."
+      - ls -R scripts/ 
       - ansible-playbook -i localhost, scripts/ansible-deploy.yml --extra-vars "eks_cluster_name=$(jq -r '.cluster_name.value' eks-cluster-output.json)"
 artifacts:
   files:
