@@ -27,7 +27,13 @@ module "eks" {
       desired_size = 2
     }
   }
+  
+ # vpc_config block with API server access settings
+  cluster_endpoint_public_access = true  # Make the API server publicly accessible
+  cluster_endpoint_private_access = true # Allow private access from within the VPC
 }
+
+ 
 
 module "fargate_profile" {
   source       = "terraform-aws-modules/eks/aws//modules/fargate-profile"
