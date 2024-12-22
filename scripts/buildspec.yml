@@ -32,7 +32,7 @@ phases:
       - echo "Terraform execution complete. Build finished."
       - echo "Running Ansible playbook to deploy the app..."
       - ls -R scripts/ 
-      - ansible-playbook -i localhost, scripts/ansible-playbook.yml --extra-vars "eks_cluster_name=$(jq -r '.cluster_name.value' eks-cluster-output.json)"
+      - ansible-playbook -i localhost, ../ansible-playbook.yml --extra-vars "eks_cluster_name=$(jq -r '.cluster_name.value' eks-cluster-output.json)"
 artifacts:
   files:
     - "**/*"
