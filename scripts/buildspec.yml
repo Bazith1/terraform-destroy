@@ -8,6 +8,9 @@ phases:
       - echo "Installing Terraform..."
       - curl -o /tmp/terraform.zip https://releases.hashicorp.com/terraform/1.5.7/terraform_1.5.7_linux_amd64.zip
       - unzip /tmp/terraform.zip -d /usr/local/bin/
+      - echo "Installing pip..."
+      - curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
+      - sudo python3 get-pip.py
       - echo "Installing Ansible..."
       - sudo pip install ansible
   pre_build:
