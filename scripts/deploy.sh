@@ -6,7 +6,7 @@ echo "Authenticating to EKS..."
 CLUSTER_NAME=$(jq -r '.cluster_name.value' terraform-output.json)
 
 # Authenticate with EKS Cluster
-aws eks update-kubeconfig --region us-east-1 --name "$CLUSTER_NAME"
+aws eks update-kubeconfig --region ap-south-1 --name "$CLUSTER_NAME"
 
 # Apply Kubernetes Manifests
 kubectl apply -f k8s/deployment.yaml
