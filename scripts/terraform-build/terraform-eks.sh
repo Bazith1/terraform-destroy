@@ -18,3 +18,8 @@ terraform plan -out=tfplan
 # Apply Terraform deployment
 echo "Applying Terraform deployment..."
 terraform apply -auto-approve tfplan
+
+echo "Saving Terraform output to terraform-output.json..."
+terraform output -json > ../terraform-output.json
+
+echo "Terraform deployment completed. Output saved to terraform-output.json"
