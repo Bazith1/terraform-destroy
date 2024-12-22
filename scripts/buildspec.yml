@@ -17,7 +17,7 @@ phases:
       - echo "Initializing Terraform..."
       - terraform init
       - echo "Applying Terraform to create/update EKS cluster..."
-      - ./terraform-eks.sh
+      - ./scripts/eks-terraform/terraform-eks.sh
   post_build:
     commands:
       - echo "Terraform execution complete. Build finished."
