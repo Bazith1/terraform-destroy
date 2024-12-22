@@ -29,7 +29,6 @@ module "eks" {
   }
 }
 
-
 module "fargate_profile" {
   source       = "terraform-aws-modules/eks/aws//modules/fargate-profile"
   name         = "separate-fargate-profile"
