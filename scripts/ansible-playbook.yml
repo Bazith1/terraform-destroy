@@ -29,6 +29,16 @@
       failed_when: deploy_result.rc != 0
       changed_when: true
 
+    - name: Output kubectl apply result
+      debug:
+        msg: "kubectl apply output: {{ deploy_result.stdout }}"
+      when: deploy_result is defined and deploy_result.rc == 0
+
+    - name: Check for kubectl apply errors
+      debug:
+        msg: "kubectl apply encountered errors: {{ deploy_result.stderr }}"
+      when: deploy_result is defined and deploy_result.rc != 0
+
     - name: Output deployment results
       debug:
         msg: "Deployment completed successfully."
