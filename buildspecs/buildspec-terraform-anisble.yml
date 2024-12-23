@@ -19,20 +19,20 @@ phases:
     commands:
       - echo "Preparing Terraform configurations..."
       - ls -R
-      - chmod +x ./scripts/terraform-build/terraform-eks.sh
+      - chmod +x ./terraform/terraform-eks.sh
   build:
     commands:
       - echo "Running Terraform script..."
-      - ./scripts/terraform-build/terraform-eks.sh
+      - ./terraform/terraform-eks.sh
       - echo "Extracting EKS cluster details..."
-      - terraform -chdir=scripts/terraform-build output -json > eks-cluster-output.json
+      - terraform -chdir= terraform output -json > eks-cluster-output.json
 
   post_build:
     commands:
       - echo "Terraform execution complete. Build finished."
       - echo "Running Ansible playbook to deploy the app..."
       - ls -R scripts/ 
-      - ansible-playbook -i localhost, scripts/ansible-playbook.yml --extra-vars "eks_cluster_name=$(jq -r '.cluster_name.value' eks-cluster-output.json)"
+      - ansible-playbook -i localhost, ansible/playbook.yml --extra-vars "eks_cluster_name=$(jq -r '.cluster_name.value' eks-cluster-output.json)"
 artifacts:
   files:
     - "**/*"
