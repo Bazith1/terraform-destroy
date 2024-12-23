@@ -10,11 +10,11 @@ phases:
       - echo "Starting build phase..."
       - docker pull bazith1/my-flask-app:latest || true
       - docker build --cache-from bazith1/my-flask-app:latest -t my-flask-app:latest .
-      - docker tag my-flask-app:latest bazith1/my-flask-app:$CODEBUILD_RESOLVED_SOURCE_VERSION
+      - docker tag my-flask-app:latest bazith1/my-flask-app:latest  # Use latest tag
   post_build:
     commands:
       - echo "Starting post-build phase..."
-      - docker push bazith1/my-flask-app:$CODEBUILD_RESOLVED_SOURCE_VERSION
+      - docker push bazith1/my-flask-app:latest  # Push with latest tag
       - echo "Build and push successful"
 artifacts:
   files:

@@ -19,6 +19,7 @@ spec:
     spec:
       containers:
       - name: my-flask-app
-        image: bazith1/my-flask-app:latest  
+        image: bazith1/my-flask-app:latest 
+        imagePullPolicy: Always  
         ports:
         - containerPort: 5000
