@@ -14,6 +14,7 @@ RUN pip install flask==2.0.0 werkzeug==2.0.0
 EXPOSE 5000
 
 # Define environment variable
+ENV FLASK_ENV development
 ENV NAME World
 
 # Run app.py when the container launches
