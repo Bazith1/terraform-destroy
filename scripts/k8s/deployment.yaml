@@ -19,6 +19,6 @@ spec:
     spec:
       containers:
       - name: my-flask-app
-        image: bazith1/my-flask-app:$CODEBUILD_RESOLVED_SOURCE_VERSION  # Dynamic image tag (replace with actual tag)
+        image: bazith1/my-flask-app:latest  
         ports:
         - containerPort: 5000
