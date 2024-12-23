@@ -7,6 +7,11 @@ spec:
   selector:
     matchLabels:
       app: my-flask-app
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1           # Allows one more pod than the desired replicas during the update
+      maxUnavailable: 1     # Allows one pod to be unavailable during the update
   template:
     metadata:
       labels:
@@ -14,7 +19,6 @@ spec:
     spec:
       containers:
       - name: my-flask-app
-        image: bazith1/my-flask-app:$CODEBUILD_RESOLVED_SOURCE_VERSION
-        imagePullPolicy: Always
+        image: bazith1/my-flask-app:$CODEBUILD_RESOLVED_SOURCE_VERSION  # Dynamic image tag (replace with actual tag)
         ports:
         - containerPort: 5000
